@@ -27,6 +27,15 @@
       "value": {
         "throttle": 0
       }
+    },
+    {
+      "key": "audioSources",
+      "value": {
+        "sound": "hover",
+        "volume": "1",
+        "index": "0",
+        "refDistance": "3"
+      }
     }
     ]
 }
