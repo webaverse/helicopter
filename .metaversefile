@@ -29,7 +29,7 @@
       }
     },
     {
-      "key": "audioSources",
+      "key": "audiosource",
       "value": {
         "sound": "hover",
         "volume": "1",
