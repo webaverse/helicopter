@@ -6,16 +6,7 @@ const {useApp, useFrame, useLoaders, usePhysics, useCleanup, useLocalPlayer, use
 
 const baseUrl = import.meta.url.replace(/(\/)[^\/\/]*$/, '$1'); 
 
-const localVector = new THREE.Vector3();
-const localVector2 = new THREE.Vector3();
-const localVector3 = new THREE.Vector3();
-const localVector4 = new THREE.Vector3();
-const localVector5 = new THREE.Vector3();
-const localQuaternion = new THREE.Quaternion();
-const localQuaternion2 = new THREE.Quaternion();
-const localQuaternion3 = new THREE.Quaternion();
-const localEuler = new THREE.Euler();
-const localMatrix = new THREE.Matrix4();
+
 
 
 export default () => {  
@@ -23,6 +14,8 @@ export default () => {
     const app = useApp();
     let prop = null;
     let heli = null;
+    const physics = usePhysics();
+    const physicsIds = [];
 
     (async () => {
         const u = `${baseUrl}/flying-machine.glb`;
@@ -43,6 +36,9 @@ export default () => {
         //heli.scene.rotation.x = Math.PI/2;
         // group.add(heli.scene);
         app.add(heli.scene);
+        let physicsId;
+        physicsId = physics.addGeometry(heli.scene);
+        physicsIds.push(physicsId)
         const geometry = new THREE.CircleGeometry( 5, 32 );
         const material = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent:true, opacity:0.5, side: THREE.DoubleSide } );
         const circle = new THREE.Mesh( geometry, material );
@@ -70,7 +66,9 @@ export default () => {
 
     
     useCleanup(() => {
-      
+      for (const physicsId of physicsIds) {
+        physics.removeGeometry(physicsId);
+      }
     });
 
     return app;
