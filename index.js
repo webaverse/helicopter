@@ -18,7 +18,7 @@ export default () => {
     const physicsIds = [];
 
     (async () => {
-        const u = `${baseUrl}/flying-machine.glb`;
+        const u = `${baseUrl}./flying-machine.glb`;
         heli = await new Promise((accept, reject) => {
             const {gltfLoader} = useLoaders();
             gltfLoader.load(u, accept, function onprogress() {}, reject);
